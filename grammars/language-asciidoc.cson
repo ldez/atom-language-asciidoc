@@ -354,6 +354,30 @@ repository:
         match: "^(?:'|<){3,}$|^ {0,3}([-\\*'])( *)\\1\\2\\1$"
       }
     ]
+  "include-directive":
+    patterns: [
+      {
+        match: "\\b(include)(::)([^\\[]+)(\\[)(.*?)(\\])$"
+        captures:
+          "1":
+            name: "entity.name.function.asciidoc"
+          "2":
+            name: "punctuation.separator.asciidoc"
+          "3":
+            name: "markup.link.asciidoc"
+          "4":
+            name: "punctuation.separator.asciidoc"
+          "5":
+            name: "string.unquoted.asciidoc"
+            patterns: [
+              {
+                include: "#attribute-reference"
+              }
+            ]
+          "6":
+            name: "punctuation.separator.asciidoc"
+      }
+    ]
   "line-break-backslash":
     patterns: [
       {
@@ -405,6 +429,25 @@ repository:
             name: "markup.list.bullet.asciidoc"
       }
     ]
+  "preprocessor-directives":
+    patterns: [
+      {
+        match: "^\\b(ifdef|ifndef|ifeval|endif)(::)(\\S*?(?:([,\\+])\\S+?)?)(\\[)(.+)?(\\])$"
+        captures:
+          "1":
+            name: "entity.name.function.asciidoc"
+          "2":
+            name: "punctuation.separator.asciidoc"
+          "3":
+            name: "markup.link.asciidoc"
+          "4":
+            name: "punctuation.separator.asciidoc"
+          "5":
+            name: "markup.meta.attribute-list.asciidoc"
+          "6":
+            name: "punctuation.separator.asciidoc"
+      }
+    ]
   section:
     patterns: [
       {
@@ -413,6 +456,21 @@ repository:
         captures:
           "1":
             name: "support.constant.asciidoc"
+      }
+    ]
+  "tag-macro":
+    patterns: [
+      {
+        match: "\\b(tag|end)(::)(\\S+)(\\[\\])$"
+        captures:
+          "1":
+            name: "entity.name.function.asciidoc"
+          "2":
+            name: "punctuation.separator.asciidoc"
+          "3":
+            name: "markup.link.asciidoc"
+          "4":
+            name: "punctuation.separator.asciidoc"
       }
     ]
   titles:

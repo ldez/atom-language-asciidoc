@@ -1,0 +1,11 @@
+key: 'tag-macro'
+
+# http://asciidoctor.org/docs/user-manual/#by-tagged-regions
+patterns: [
+  match: '\\b(tag|end)(::)(\\S+)(\\[\\])$'
+  captures:
+    1: name: 'entity.name.function.asciidoc'
+    2: name: 'punctuation.separator.asciidoc'
+    3: name: 'markup.link.asciidoc'
+    4: name: 'punctuation.separator.asciidoc'
+]
